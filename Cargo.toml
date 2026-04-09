@@ -2,4 +2,15 @@
 name = "cuda-equipment"
 version = "0.1.0"
 edition = "2021"
-description = "Shared equipment library — Confidence, Tile, Agent, Fleet messaging, Equipment registry for the Lucineer fleet"
+description = "Shared equipment library for the Lucineer AI fleet — Confidence, Tile, Agent, Fleet messaging, Equipment registry"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/Lucineer/cuda-equipment"
+readme = "README.md"
+keywords = ["ai", "fleet", "agent", "confidence", "a2a", "equipment", "rust"]
+categories = ["science", "algorithms"]
+exclude = [".github", "docs", "examples", "tests"]
+
+[dependencies]
+serde_json = "1.0"
+
+[dev-dependencies]
