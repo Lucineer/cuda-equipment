@@ -1,0 +1,5 @@
+[package]
+name = "cuda-equipment"
+version = "0.1.0"
+edition = "2021"
+description = "Shared equipment library — Confidence, Tile, Agent, Fleet messaging, Equipment registry for the Lucineer fleet"
