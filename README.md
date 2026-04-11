@@ -1,61 +1,94 @@
 # cuda-equipment
 
-**The chandlery - shared equipment for every vessel in the fleet.**
+Shared equipment library — Confidence propagation, Tile grid, Agent trait, Fleet A2A messaging, Equipment registry. The pulleys and engines every vessel needs.
 
-> Every ship needs ropes, sails, and a compass before it can sail.
-> Every agent needs confidence, trust, and communication before it can think.
+Part of the Cocapn build layer — compilers, assemblers, and code transformation.
 
-## What It Provides
+## What It Does
 
-`cuda-equipment` is the foundational crate that all other fleet crates build on.
+### Key Types
 
-### Core Types
+- `Confidence(pub f64);` — core data structure
+- `TileId(pub u64);` — core data structure
+- `Tile<T>` — core data structure
+- `TileGrid<T: Clone + Default>` — core data structure
+- `VesselId(pub u64);` — core data structure
+- `FleetMessage` — core data structure
+- _and 9 more (see source)_
 
-- **`Confidence`** - First-class uncertainty primitive (0.0 to 1.0). Fuses via harmonic mean.
-- **`Tile`** / **`TileGrid`** - Spatial representation for attention, spatial reasoning, sensor data.
-- **`FleetMessage`** - 11 message types for agent-to-agent communication.
-- **`Agent` trait** - Interface every fleet agent implements.
-- **`Fleet`** - Agent registry with register(), send(), broadcast(), ping_all().
-- **`AgentBuilder`** - Fluent constructor for agents.
-- **`EquipmentRegistry`** - 15 sensor types + 12 actuator types.
-- **`Provenance`** - Decision lineage tracking.
+## Quick Start
 
-### Why This Exists
+```bash
+# Clone
+git clone https://github.com/Lucineer/cuda-equipment.git
+cd cuda-equipment
 
-In a fleet of autonomous agents, every agent needs the same basic equipment. Instead of each crate re-implementing these, cuda-equipment provides them once, correctly.
+# Build
+cargo build
+
+# Run tests
+cargo test
+```
 
 ## Usage
 
 ```rust
-use cuda_equipment::{Confidence, Agent, Fleet};
+use cuda_equipment::*;
 
-let mut fleet = Fleet::new();
-fleet.register(my_agent);
-let c1 = Confidence::new(0.8);
-let c2 = Confidence::new(0.9);
-let fused = c1.fuse(&c2); // harmonic mean
+// See src/lib.rs for full API
+// 0 unit tests included
 ```
 
-## Ecosystem Integration
+### Available Implementations
 
-This crate is a dependency of **19+ other crates** including cuda-confidence-cascade, cuda-convergence, cuda-filtration, cuda-deliberation, cuda-intent-embed, cuda-edge-runtime, cuda-resolve-agent, cuda-sensor-agent, cuda-swarm-agent, cuda-git-agent, and cuda-captain.
+- `Confidence` — see source for methods
+- `fmt::Display for Confidence` — see source for methods
+- `From` — see source for methods
+- `Default for Confidence` — see source for methods
+- `fmt::Display for TileId` — see source for methods
+- `fmt::Display for VesselId` — see source for methods
 
-## Confidence Propagation
+## Testing
 
-The harmonic mean formula `1/(1/a + 1/b)` is used throughout the fleet:
-- `cuda-confidence` - primitive fusion
-- `cuda-confidence-cascade` - cascaded fusion with gates
-- `cuda-fusion` - multi-source weighted/Bayesian fusion
-- `cuda-sensor-agent` - Bayesian sensor fusion
-- `cuda-trust` - trust accumulation via confidence
+```bash
+cargo test
+```
 
-## See Also
+0 unit tests covering core functionality.
 
-- [cuda-confidence](https://github.com/Lucineer/cuda-confidence) - Standalone confidence type
-- [cuda-a2a](https://github.com/Lucineer/cuda-a2a) - Agent-to-agent protocol
-- [cuda-actor](https://github.com/Lucineer/cuda-actor) - Actor model implementation
-- [flux-runtime-c](https://github.com/Lucineer/flux-runtime-c) - C VM that executes fleet opcodes
+## Architecture
+
+This crate is part of the **Cocapn Fleet** — a git-native multi-agent ecosystem.
+
+- **Category**: build
+- **Language**: Rust
+- **Dependencies**: See `Cargo.toml`
+- **Status**: Active development
+
+## Related Crates
+
+- [cuda-bytecode-optimizer](https://github.com/Lucineer/cuda-bytecode-optimizer)
+- [cuda-asm](https://github.com/Lucineer/cuda-asm)
+- [cuda-forth](https://github.com/Lucineer/cuda-forth)
+
+## Fleet Position
+
+```
+Casey (Captain)
+├── JetsonClaw1 (Lucineer realm — hardware, low-level systems, fleet infrastructure)
+├── Oracle1 (SuperInstance — lighthouse, architecture, consensus)
+└── Babel (SuperInstance — multilingual scout)
+```
+
+## Contributing
+
+This is a fleet vessel component. Fork it, improve it, push a bottle to `message-in-a-bottle/for-jetsonclaw1/`.
 
 ## License
 
-MIT OR Apache-2.0
+MIT
+
+---
+
+*Built by JetsonClaw1 — part of the Cocapn fleet*
+*See [cocapn-fleet-readme](https://github.com/Lucineer/cocapn-fleet-readme) for the full fleet roadmap*
